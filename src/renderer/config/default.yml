@@ -1,0 +1,11 @@
+sidebar:
+  headers:
+    title: Hyper
+    subTitle: Typing well.
+  menu:
+    - name: index
+      path: /
+      label: 首页
+    - name: posts
+      path: /posts
+      label: 文章
