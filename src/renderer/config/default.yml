@@ -1,11 +1,11 @@
 sidebar:
   headers:
     title: Hyper
-    subTitle: Typing well.
+    subtitle: Typing well.
   menu:
-    - name: index
-      path: /
-      label: 首页
     - name: posts
-      path: /posts
-      label: 文章
+      path: /blog/posts
+      icon: book
+    - name: views
+      path: /review
+      icon: safari
