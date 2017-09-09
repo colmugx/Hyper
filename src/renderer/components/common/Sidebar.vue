@@ -5,7 +5,7 @@
         <i :class="'fa fa-' + menu.icon"></i>
       </div>
     </template>
-    <div class="sidebar-item setting">
+    <div class="sidebar-item setting" @click="currentPage = 99" :class="{'selected': 99 === currentPage}">
       <i class="fa fa-cog"></i>
     </div>
   </nav>
@@ -13,10 +13,13 @@
 
 <script lang="ts">
 import { Vue, Component, Watch } from 'vue-property-decorator'
+import { Mutation } from 'vuex-class'
 import FileSys from '../../libs/FileSys'
 
 @Component
 export default class SideBar extends Vue {
+
+  @Mutation('TITLE') setTitle
 
   menus: String[]
   selected: Boolean = false
@@ -30,7 +33,9 @@ export default class SideBar extends Vue {
 
   @Watch('currentPage')
   onChangePage(val: any) {
+    if (val === 99) return this.$emit('change', '/setting')
     this.$emit('change', this.menus[val]['path'] as any)
+    this.setTitle(this.menus[val]['name'])
   }
 
 }

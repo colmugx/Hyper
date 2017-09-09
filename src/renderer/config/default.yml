@@ -3,9 +3,9 @@ sidebar:
     title: Hyper
     subtitle: Typing well.
   menu:
-    - name: posts
+    - name: 文章列表
       path: /blog/posts
       icon: book
-    - name: views
+    - name: Review
       path: /review
       icon: safari

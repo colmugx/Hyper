@@ -22,6 +22,11 @@ export default new Router({
         {
           path: '/review',
           component: require('@/views/review/review')
+        },
+        {
+          path: '/setting',
+          name: 'Settings',
+          component: require('@/views/setting')
         }
       ]
     },

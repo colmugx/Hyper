@@ -19,14 +19,8 @@ export default class MainView extends Vue {
 
   marginLeft: string
 
-  @Mutation('TITLE') setTitle
-
   handleChange(url) {
     this.$router.push({ path: url })
-  }
-
-  created() {
-    this.setTitle('文章列表')
   }
 
   get styles() {

@@ -9,8 +9,7 @@ import { Vue, Component, Watch } from 'vue-property-decorator'
 import { State } from 'vuex-class'
 
 @Component({
-  name: 'title-bar',
-
+  name: 'title-bar'
 })
 export default class TitleBar extends Vue {
 
@@ -22,7 +21,6 @@ export default class TitleBar extends Vue {
 
   @Watch('$route')
   routeChange(to: any, from: any) {
-    console.log(to)
     return this.currentTitle
   }
 
