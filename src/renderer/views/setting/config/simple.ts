@@ -55,7 +55,7 @@ export default [
         value: 'theme'
       },
       {
-        name: '部署',
+        name: '部署(git地址)',
         value: 'deploy',
         args: ['repo']
       }

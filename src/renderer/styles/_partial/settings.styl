@@ -1,5 +1,6 @@
 @import '../_mixins.styl'
 .app-settings
+  margin-bottom 16px
   box-sizing border-box
   .header
     padding 32px
@@ -35,6 +36,32 @@
           .item-select
             background-color transparent
             cursor pointer
+          .item-check
+            width 300px
+            display flex
+            padding 4px 0
+            flex-direction row
+            align-items center
+            justify-content space-between
+            span
+              font-size 12px
+  .submit-group
+    padding 0 32px
+    padding-bottom 16px
+    text-align -webkit-center
+    .submit-btn
+      -webkit-appearance none
+      -webkit-user-select none
+      cursor pointer
+      background-color transparent
+      padding 4px 8px
+      border 1px solid #999
+      border-radius 6px
+      width: 100px
+      color #666
+      font-size 12px
+      text-align center
+      font-weight 400
 
   .footer
     position absolute

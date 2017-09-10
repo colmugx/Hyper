@@ -22,12 +22,20 @@
                     </optgroup>
                   </template>
                 </select>
+                <div class="item-check" v-else-if="item.value === 'highlight'">
+                  <span>{{configValue[item.value].enable ? '启' : '禁'}}用</span>
+                  <bd-switch v-model="configValue[item.value].enable"></bd-switch>
+                </div>
+                <input class="item-input" v-model="configValue[item.value].repo" v-else-if="item.value === 'deploy'">
                 <input class="item-input" v-model="configValue[item.value]" v-else>
               </div>
             </template>
           </div>
         </div>
       </template>
+    </div>
+    <div class="submit-group">
+      <div class="submit-btn" @click="confirmUpd">确认修改</div>
     </div>
     <footer class="footer">
       <div class="platform" >System: {{platform}}</div>
@@ -43,8 +51,13 @@ import FileSys from '../../libs/FileSys'
 import HexoSys from '../../libs/HexoSys'
 import SimpleConf from './config/simple'
 import Timezones from './config/timezone'
+import bdSwitch from '../../components/Bandix-h/switch'
 
-@Component
+@Component({
+  components: {
+    bdSwitch
+  }
+})
 export default class Setting extends Vue {
 
   @State(state => state.App.blogPath) _path
@@ -62,8 +75,12 @@ export default class Setting extends Vue {
     return Timezones
   }
 
-  created () {
+  created() {
     this.configValue = Object.assign({}, HexoSys.readConfig(this._path[0]))
+  }
+
+  confirmUpd() {
+    console.log('commit')
   }
 
 }
