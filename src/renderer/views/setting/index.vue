@@ -22,7 +22,7 @@
                     </optgroup>
                   </template>
                 </select>
-                <input v-model="configValue[item.value]" v-else>
+                <input class="item-input" v-model="configValue[item.value]" v-else>
               </div>
             </template>
           </div>
@@ -70,37 +70,5 @@ export default class Setting extends Vue {
 </script>
 
 <style lang="stylus" scoped>
-.app-settings
-  box-sizing border-box
-  .header
-    padding 32px
-    .header-title
-      font-size 1.4em
-    .header-desc
-      font-size 12px
-      color #737373
-  .settings-wrapper
-    padding 0 32px
-    .setting-group
-      margin-bottom 16px
-      .group-name
-        font-size 16px
-        margin 8px 0
-      .group-wrapper
-        .group-item
-          margin 8px 0
-          .item-name
-            font-size 12px
-  .footer
-    position absolute
-    bottom 0
-    right 0
-    margin 2px 8px
-    .platform
-    .version
-      display inline-block
-      font-size 10px
-      color #666
-      font-family 'PingFang SC', Helvetica, sans-serif
-      font-weight 100
+@import '../../styles/_partial/settings.styl'
 </style>

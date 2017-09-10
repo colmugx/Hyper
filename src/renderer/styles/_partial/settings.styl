@@ -1,0 +1,50 @@
+@import '../_mixins.styl'
+.app-settings
+  box-sizing border-box
+  .header
+    padding 32px
+    .header-title
+      font-size 1.4em
+    .header-desc
+      font-size 12px
+      color #737373
+  .settings-wrapper
+    padding 0 32px
+    .setting-group
+      margin-bottom 32px
+      .group-name
+        font-size 16px
+        margin-bottom 16px
+        font-weight 300
+      .group-wrapper
+        .group-item
+          margin 8px 0 12px
+          .item-name
+            font-size 12px
+            font-weight 100
+          .item-input
+          .item-select
+            outline none
+            -webkit-appearance none
+            border none
+            border-line(bottom, #777)
+            width 300px
+            padding 4px 8px
+            padding-bottom 6px
+            font-size 12px
+          .item-select
+            background-color transparent
+            cursor pointer
+
+  .footer
+    position absolute
+    bottom 0
+    right 0
+    margin 2px 8px
+    .platform
+    .version
+      display inline-block
+      font-size 10px
+      color #666
+      font-family 'PingFang SC', Helvetica, sans-serif
+      font-weight 100

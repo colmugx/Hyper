@@ -1,4 +1,3 @@
-
 export default [
   {
     name: '页面设置',
@@ -33,7 +32,7 @@ export default [
     name: '地址设置',
     value: [
       {
-        name: '博客地址（预览必须）',
+        name: '博客地址（预览必须，HTTP/HTTPS）',
         value: 'url'
       }
     ]
