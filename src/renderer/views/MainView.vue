@@ -1,7 +1,9 @@
 <template>
   <div class="main-view">
     <sidebar @change="handleChange" ref="sidebar" />
-    <router-view :style="styles"></router-view>
+    <div :style="[styles, {height: currentHeight + 'px'}]">
+      <router-view ></router-view>
+    </div>
   </div>
 </template>
 
@@ -18,14 +20,20 @@ import Sidebar from '../components/common/Sidebar'
 export default class MainView extends Vue {
 
   marginLeft: string
+  currentHeight: Number = 0
 
   handleChange(url) {
     this.$router.push({ path: url })
   }
 
+  mounted () {
+    this.currentHeight = document.body.clientHeight - 22
+  }
+
   get styles() {
     return {
-      marginLeft: '60px'
+      marginLeft: '60px',
+      overflow: 'auto'
     }
   }
 

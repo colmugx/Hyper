@@ -24,7 +24,7 @@
 <script lang="ts">
 import { Vue, Component, Watch } from 'vue-property-decorator'
 import { State, Mutation } from 'vuex-class'
-import HexoSys from '../../libs/hexoSys'
+import HexoSys from '../../libs/HexoSys'
 
 @Component
 export default class ReviewPage extends Vue {
@@ -32,6 +32,7 @@ export default class ReviewPage extends Vue {
   currentTitle: String = "Review"
   currentUrl: string = ''
 
+  webView: any
   prevDis: Boolean = false
   nextDis: Boolean = false
 
@@ -45,41 +46,40 @@ export default class ReviewPage extends Vue {
 
   mounted() {
     const webview = <any>document.querySelector('webview')
+    this.webView = webview
     webview.addEventListener('dom-ready', () => {
       this.currentTitle = 'Review - ' + webview.getTitle()
     })
   }
 
   updated() {
-    const webview = <any>document.querySelector('webview')
-    if (!(webview.canGoBack())) this.prevDis = true
+    if (!(this.webView.canGoBack())) this.prevDis = true
     else this.prevDis = false
-    if (!(webview.canGoForward())) this.nextDis = true
+    if (!(this.webView.canGoForward())) this.nextDis = true
     else this.nextDis = false
   }
 
   clickPrev() {
     if (this.prevDis) return
-    const webview = <any>document.querySelector('webview')
-    webview.goBack()
+    this.webView.goBack()
   }
 
   clickNext() {
     if (this.nextDis) return
     const webview = <any>document.querySelector('webview')
-    webview.goForward()
+    this.webView.goForward()
   }
 
   clickReload() {
     if (this.nextDis) return
     const webview = <any>document.querySelector('webview')
-    webview.reload()
+    this.webView.reload()
   }
 
   clickHome() {
     if (this.nextDis) return
     const webview = <any>document.querySelector('webview')
-    webview.loadURL(this.currentUrl)
+    this.webView.loadURL(this.currentUrl)
   }
 
   @Watch('currentTitle')
@@ -91,32 +91,5 @@ export default class ReviewPage extends Vue {
 
 
 <style lang="stylus" scoped>
-.review
-  .toolbar
-    display flex
-    flex-direction row
-    align-items center
-    min-height 32px
-    padding-bottom 4px
-    margin-bottom 2px
-    .btn
-      margin 0 16px
-      i
-        font-size 16px
-        color #515352
-      &.disabled
-        i
-          color #eee
-          cursor default
-    .inp-address
-      flex 1
-      min-height 25px
-      margin-right 16px
-      font-size 14px
-      padding 4px 8px
-      box-shadow inset 0px 0px 2px 0px #ccc
-      color #666
-  .webview
-    height calc(100vh - 22px)
-    width 100%
+@import '../../styles/_partial/review.styl'
 </style>

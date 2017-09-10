@@ -1,0 +1,36 @@
+.review
+  .toolbar
+    display flex
+    flex-direction row
+    align-items center
+    min-height 32px
+    padding-bottom 4px
+    margin-bottom 2px
+    position relative
+    &:after
+      content ''
+      position absolute
+      bottom 0
+      left 0
+      right 0
+      height 1px
+      background-color #f0f0f0
+    .btn
+      margin 0 16px
+      i
+        font-size 16px
+        color #515352
+      &.disabled
+        i
+          color #eee
+          cursor default
+    .inp-address
+      flex 1
+      min-height 25px
+      margin-right 16px
+      font-size 14px
+      padding 4px 8px
+      color #666
+  .webview
+    height calc(100vh - 22px)
+    width 100%

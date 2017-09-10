@@ -33,7 +33,11 @@ export default class SideBar extends Vue {
 
   @Watch('currentPage')
   onChangePage(val: any) {
-    if (val === 99) return this.$emit('change', '/setting')
+    if (val === 99) {
+      this.$emit('change', '/setting')
+      this.setTitle('设置')
+      return
+    }
     this.$emit('change', this.menus[val]['path'] as any)
     this.setTitle(this.menus[val]['name'])
   }
