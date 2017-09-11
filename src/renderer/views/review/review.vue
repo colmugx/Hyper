@@ -2,22 +2,22 @@
   <div class="review">
     <div class="toolbar">
       <div class="btn prev" :class="{'disabled': prevDis}" @click="clickPrev()">
-        <i class="fa fa-arrow-left"></i>
+        <i class="iconfont icon-arrowleft"></i>
       </div>
       <div class="btn next" :class="{'disabled': nextDis}" @click="clickNext()">
-        <i class="fa fa-arrow-right"></i>
+        <i class="iconfont icon-arrowright"></i>
       </div>
       <div class="btn home" @click="clickHome()">
-        <i class="fa fa-home"></i>
+        <i class="iconfont icon-home"></i>
       </div>
       <div class="btn reload" @click="clickReload()">
-        <i class="fa fa-refresh"></i>
+        <i class="iconfont icon-reload"></i>
       </div>
       <div class="inp-address">
         <span>{{ currentUrl }}</span>
       </div>
     </div>
-    <webview id="webview" :src="currentUrl" class="webview" autosize="on" ref="webview"></webview>
+    <webview id="webview" :src="currentUrl" class="webview" ref="webview"></webview>
   </div>
 </template>
 

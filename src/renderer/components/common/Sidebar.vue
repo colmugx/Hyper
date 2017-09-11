@@ -2,11 +2,11 @@
   <nav class="sidebar" ref="sidebar">
     <template v-for="(menu, index) in menus">
       <div class="sidebar-item" @click="currentPage = index" :class="{'selected': index === currentPage}" :key="menu.index">
-        <i :class="'fa fa-' + menu.icon"></i>
+        <i :class="'iconfont icon-' + menu.icon"></i>
       </div>
     </template>
     <div class="sidebar-item setting" @click="currentPage = 99" :class="{'selected': 99 === currentPage}">
-      <i class="fa fa-cog"></i>
+      <i class="iconfont icon-setting"></i>
     </div>
   </nav>
 </template>
@@ -46,7 +46,7 @@ export default class SideBar extends Vue {
 </script>
 
 <style scoped>
-@import url('../../assets/css/font-awesome.min.css');
+@import url('../../assets/antd/iconfont.css');
 </style>
 
 

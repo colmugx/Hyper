@@ -33,7 +33,7 @@ export default class StartScreen extends Vue {
 <style lang="stylus" scoped>
 .start-view
   width 100vw
-  height 100vh
+  height calc(100vh - 22px)
   display flex
   flex-direction column
   align-items center
