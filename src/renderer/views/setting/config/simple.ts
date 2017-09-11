@@ -16,7 +16,7 @@ export default [
       },
       {
         name: '作者',
-        value: 'subtitle'
+        value: 'author'
       },
       {
         name: '语言（主题语言）',

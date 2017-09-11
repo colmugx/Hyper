@@ -6,7 +6,12 @@ import jsyaml from 'js-yaml'
 import FileSys from './FileSys'
 
 export default {
+
   readConfig(_path) {
     return jsyaml.safeLoad(fs.readFileSync(path.join(_path, '_config.yml'), 'utf8'))
+  },
+
+  readPosts (_path) {
+    return fs.readdirSync(path.join(_path, 'source', '_posts'))
   }
 }
