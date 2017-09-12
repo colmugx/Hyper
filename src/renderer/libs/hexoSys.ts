@@ -13,5 +13,9 @@ export default {
 
   readPosts (_path) {
     return fs.readdirSync(path.join(_path, 'source', '_posts'))
+  },
+
+  postLinks (_path, name) {
+    return path.join(_path, 'source', '_posts', name)
   }
 }
