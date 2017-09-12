@@ -1,5 +1,5 @@
 const state = {
-  appTitle: 'Hexo'
+  appTitle: ' '
 }
 
 const mutations = {

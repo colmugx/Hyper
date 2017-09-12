@@ -29,6 +29,7 @@ export default class SideBar extends Vue {
   created () {
     let obj = FileSys.readYml('/config/default.yml')
     this.menus = obj.sidebar.menu
+    this.setTitle(this.menus[0]['name'])
   }
 
   @Watch('currentPage')
