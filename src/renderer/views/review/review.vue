@@ -14,7 +14,9 @@
         <i class="iconfont icon-reload"></i>
       </div>
       <div class="inp-address">
-        <span>{{ currentUrl }}</span>
+        <select v-model="currentUrl" class="address-select">
+          <option v-for="item in optionUrl" :key="item" :value="item">{{item}}</option>
+        </select>
       </div>
     </div>
     <webview id="webview" :src="currentUrl" class="webview" ref="webview"></webview>
@@ -32,6 +34,8 @@ export default class ReviewPage extends Vue {
   currentTitle: String = "Review"
   currentUrl: string = ''
 
+  optionUrl: any[] = ['http://localhost:4000', 'http://0.0.0.0:4000']
+
   webView: any
   prevDis: Boolean = false
   nextDis: Boolean = false
@@ -41,6 +45,7 @@ export default class ReviewPage extends Vue {
 
   created () {
     let url: string = HexoSys.readConfig(this._path[0]).url
+    this.optionUrl.push(url)
     this.currentUrl = url
   }
 
