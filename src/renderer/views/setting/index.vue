@@ -35,7 +35,7 @@
       </template>
     </div>
     <div class="submit-group">
-      <div class="submit-btn" @click="confirmUpd">确认修改</div>
+      <bd-button @click.native="confirmUpd()" label="确认修改"></bd-button>
     </div>
     <footer class="footer">
       <div class="platform" >System: {{platform}}</div>
@@ -52,10 +52,12 @@ import HexoSys from '../../libs/HexoSys'
 import SimpleConf from './config/simple'
 import Timezones from './config/timezone'
 import bdSwitch from '../../components/Bandix-h/switch'
+import bdButton from '../../components/Bandix-h/button'
 
 @Component({
   components: {
-    bdSwitch
+    bdSwitch,
+    bdButton
   }
 })
 export default class Setting extends Vue {
