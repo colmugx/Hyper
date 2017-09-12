@@ -12,9 +12,12 @@ export default new Router({
     },
     {
       path: '/main',
-      name: 'main-view',
       component: require('@/views/MainView'),
       children: [
+        {
+          path: '/',
+          redirect: '/blog/posts'
+        },
         {
           path: '/blog/posts',
           component: require('@/views/blog/list')
