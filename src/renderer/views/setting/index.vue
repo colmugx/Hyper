@@ -78,7 +78,7 @@ export default class Setting extends Vue {
   }
 
   created() {
-    this.configValue = Object.assign({}, HexoSys.readConfig(this._path[0]))
+    this.configValue = Object.assign({}, HexoSys.readConfig(this._path))
   }
 
   confirmUpd() {

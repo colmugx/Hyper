@@ -5,6 +5,7 @@ const state = {
 const mutations = {
   SETPATH: (state, data) => {
     state.blogPath = data
+    localStorage.blogPath = data
   }
 }
 

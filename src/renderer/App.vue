@@ -7,6 +7,7 @@
 
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator'
+import { Mutation } from 'vuex-class'
 import TitleBar from './components/common/TitleBar'
 
 @Component({
@@ -16,6 +17,13 @@ import TitleBar from './components/common/TitleBar'
   }
 })
 export default class App extends Vue {
+
+  @Mutation('SETPATH') setBlogPath
+  created() {
+    if (localStorage.getItem('blogPath')) {
+      this.setBlogPath(localStorage.getItem('blogPath'))
+    }
+  }
 }
 </script>
 

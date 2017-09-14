@@ -12,17 +12,22 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import { Mutation } from 'vuex-class'
+import { State, Mutation } from 'vuex-class'
 
 @Component
 export default class StartScreen extends Vue {
 
+@State(state => state.App.blogPath) _path
 @Mutation('SETPATH') setBlogPath
 
   begin() {
+    if (this._path) {
+      this.$router.push('/main')
+      return
+    }
     (this as any).$electron.remote.dialog.showOpenDialog({ properties: ['openDirectory'] }, (val) => {
       if (val) {
-        this.setBlogPath(val)
+        this.setBlogPath(val[0])
         this.$router.push('/main')
       }
     })

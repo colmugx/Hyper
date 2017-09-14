@@ -44,7 +44,7 @@ export default class ReviewPage extends Vue {
   @Mutation('TITLE') changeTitle
 
   created () {
-    let url: string = HexoSys.readConfig(this._path[0]).url
+    let url: string = HexoSys.readConfig(this._path).url
     this.optionUrl.push(url)
     this.currentUrl = url
   }
