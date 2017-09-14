@@ -26,7 +26,12 @@ export default class Simplemde extends Vue {
       element: this.$el.firstElementChild,
       renderingConfig: {},
       initialValue: this.value,
-      indentWithTabs: false
+      spellChecker: false,
+      indentWithTabs: false,
+      toolbar: ['bold', 'italic', 'strikethrough', 'heading', '|',
+                'quote', 'unordered-list', '|',
+                'link', 'image', 'table', '|', 'preview',
+                'side-by-side', 'fullscreen', '|', 'clean-block']
     }
 
     if (this.highlight) {
