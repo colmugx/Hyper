@@ -20,12 +20,15 @@ export default class HexoCmd {
   newpost(_path: String, name: String, fn) {
     let newPost = this.spawn('hexo', ['new', name], { cwd: _path })
     newPost.stdout.on('data', (data) => {
-        this.cb(fn, data)
+      this.cb(fn, data)
+    })
+    newPost.stderr.on('data', (err) => {
+      console.log(err.toString())
     })
   }
 
   private cb(fn: Function, data: any) {
-    return fn && fn(data)
+    return fn && fn(data.toString())
   }
 
 }
