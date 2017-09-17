@@ -1,10 +1,10 @@
 import childProcess from 'child_process'
 
 export default class HexoCmd {
-  spawn: Function = childProcess.spawn
-  exec: Function = childProcess.exec
+  spawn: any = childProcess.spawn
+  exec: any = childProcess.exec
 
-  server(_path: String, fn) {
+  server(_path: string, fn) {
     let server = this.spawn('hexo', ['server'], {cwd: _path})
     server.stdout.on('data', (data) => {
         this.cb(fn, {data: data.toString(), pid: server.pid})
@@ -17,7 +17,7 @@ export default class HexoCmd {
     })
   }
 
-  newpost(_path: String, name: String, fn) {
+  newpost(_path: string, name: string, fn) {
     let newPost = this.spawn('hexo', ['new', name], { cwd: _path })
     newPost.stdout.on('data', (data) => {
       this.cb(fn, data)
@@ -27,7 +27,7 @@ export default class HexoCmd {
     })
   }
 
-  private cb(fn: Function, data: any) {
+  private cb(fn: (data: string) => any, data: any) {
     return fn && fn(data.toString())
   }
 

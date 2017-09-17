@@ -31,14 +31,14 @@ import HexoSys from '../../libs/HexoSys'
 @Component
 export default class ReviewPage extends Vue {
 
-  currentTitle: String = "Review"
+  currentTitle: string = "Review"
   currentUrl: string = ''
 
   optionUrl: any[] = ['http://localhost:4000', 'http://0.0.0.0:4000']
 
   webView: any
-  prevDis: Boolean = false
-  nextDis: Boolean = false
+  prevDis: boolean = false
+  nextDis: boolean = false
 
   @State(state => state.App.blogPath) _path
   @Mutation('TITLE') changeTitle

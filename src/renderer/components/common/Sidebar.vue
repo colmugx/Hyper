@@ -21,9 +21,9 @@ export default class SideBar extends Vue {
 
   @Mutation('TITLE') setTitle
 
-  menus: String[]
-  selected: Boolean = false
-  currentPage: Number = 0
+  menus: string[]
+  selected: boolean = false
+  currentPage: number = 0
 
   // data
   created () {
@@ -33,13 +33,13 @@ export default class SideBar extends Vue {
   }
 
   @Watch('currentPage')
-  onChangePage(val: any) {
+  onChangePage(val: number) {
     if (val === 99) {
       this.$emit('change', '/setting')
       this.setTitle('设置')
       return
     }
-    this.$emit('change', this.menus[val]['path'] as any)
+    this.$emit('change', this.menus[val]['path'])
     this.setTitle(this.menus[val]['name'])
   }
 

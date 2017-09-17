@@ -9,6 +9,15 @@ import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import simplemde from 'simplemde'
 import highlight from 'highlight.js'
 
+interface configs {
+  element: Element,
+  renderingConfig: any,
+  initialValue: string,
+  spellChecker: boolean,
+  indentWithTabs: boolean,
+  toolbar: string[]
+}
+
 @Component
 export default class Simplemde extends Vue {
 
@@ -17,12 +26,12 @@ export default class Simplemde extends Vue {
   @Prop({
     default: true
   })
-  highlight: Boolean
+  highlight: boolean
 
   simplemde: any = null
 
   mounted() {
-    let config: any = {
+    let config: configs = {
       element: this.$el.firstElementChild,
       renderingConfig: {},
       initialValue: this.value,

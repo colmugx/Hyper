@@ -1,5 +1,5 @@
 
-export const filename = (val: String): String => {
+export const filename = (val: string): string => {
   if (!val) return
 
   if (val.substr(0, 1) === '_') {

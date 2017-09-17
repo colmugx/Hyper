@@ -35,6 +35,8 @@ export default class TitleBar extends Vue {
 
 <style lang="stylus" scoped>
 #title-bar
+  position relative
+  z-index 9999
   width 100%
   height 22px
   background-color transparent

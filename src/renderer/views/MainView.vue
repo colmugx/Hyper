@@ -20,7 +20,7 @@ import Sidebar from '../components/common/Sidebar'
 export default class MainView extends Vue {
 
   marginLeft: string
-  currentHeight: Number = 0
+  currentHeight: number = 0
 
   handleChange(url) {
     this.$router.push({ path: url })
