@@ -9,5 +9,7 @@ npm install
 # Run dev
 npm run dev
 
-#Release
+# Release
 npm run build
+
+```
