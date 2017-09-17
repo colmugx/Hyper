@@ -1,5 +1,5 @@
 <template>
-  <button class="band-button" v-text="label">
+  <button class="band-button" :class="size" v-text="label">
   </button>
 </template>
 
@@ -7,7 +7,17 @@
 export default {
   name: 'bd-button',
   props: {
-    label: String
+    label: String,
+    size: {
+      type: String,
+      default: 'normal',
+      validator(val) {
+        return [
+          'tiny',
+          'normal'
+        ].indexOf(val) > -1
+      }
+    }
   }
 }
 </script>
@@ -33,5 +43,7 @@ export default {
     border-color #6e6e6e
   &:active
     transform scale(0.95)
+  &.tiny
+    width 80px
 </style>
 

@@ -12,9 +12,9 @@ import { Vue, Component, Prop } from "vue-property-decorator"
 export default class Switch extends Vue {
 
   @Prop()
-  value: String
+  value: string
   @Prop()
-  disabled: String
+  disabled: string
 
   get currentValue() {
     return this.value

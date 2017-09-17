@@ -1,7 +1,6 @@
 <template>
   <transition name="dialog-fade">
-    <div class="dialog" v-show="visible">
-      <div class="dialog-mark" @click.self="handleMark"></div>
+    <div class="dialog" v-show="visible" @click.self="handleMark">
       <div class="dialog-wrapper">
         <slot></slot>
       </div>
@@ -18,7 +17,7 @@ export default class Dialog extends Vue {
   @Prop({
     default: false
   })
-  visible: Boolean
+  visible: boolean
 
   @Watch('visible')
   HandleVisible(val) {
@@ -35,25 +34,28 @@ export default class Dialog extends Vue {
 
 <style lang="stylus" scoped>
 .dialog
-  position relative
-  .dialog-mark
-    position fixed
-    width 100%
-    max-height 100%
-    height calc(100vh - 22px)
-    padding-top 32px
-    padding-left 200px
-    z-index 2000
+  position fixed
+  top 0
+  right 0
+  bottom 0
+  left 0
+  width 100%
+  max-height 100%
+  height calc(100vh - 22px)
+  padding-top 32px
+  padding-left 200px
+  z-index 2000
   .dialog-wrapper
     position absolute
-    top 50%
+    top 22px
     left 50%
     z-index 2001
     transform translateX(-50%)
-    box-shadow 0px 1px 2px 0px #c5c5c5
+    box-shadow 0px 2px 2px 1px #b4b4b4
     min-width 300px
     padding 16px
     box-sizing border-box
+    background-color #fff
 
 .dialog-fade-enter-active,
 .dialog-fade-leave-active

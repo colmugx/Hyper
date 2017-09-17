@@ -12,9 +12,9 @@ import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 export default class Input extends Vue {
 
   @Prop()
-  value: String
+  value: string
   @Prop()
-  name: String
+  name: string
 
   get currentValue() {
     return this.value
