@@ -1,0 +1,28 @@
+@import './dialog.styl'
+@import './syuanpi.styl'
+
+wrapper('toast')
+.toast
+  position fixed
+  top 0
+  right 0
+  left 0
+  width 100%
+  height auto
+  padding-top 32px
+  padding-left 200px
+  z-index 2000
+  .toast-wrapper
+    top 32px
+    border-top 3px dashed #71c3ff
+    padding 8px 16px
+    &.toast-color-danger
+      border-color #ef598b
+    &.toast-color-primary
+      border-color #71c3ff
+    &.toast-color-success
+      border-color #10de6c
+    .toast-value
+      color #8391a5
+      text-align center
+      font-size 14px
