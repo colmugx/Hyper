@@ -1,36 +1,22 @@
 <template>
   <div class="posts-list">
-    <div class="file-list">
-      <div class="toolbar">
-        <div class="btn edit" >
-          <i class="iconfont icon-file"></i>
-        </div>
-        <div class="btn deploy">
-          <i class="iconfont icon-clouduploado"></i>
-        </div>
-      </div>
-      <div class="list-wrapper">
-        <ul class="article-list">
-          <li class="article-item" v-for="(post, idx) in posts" :key="idx" @click="openPost(post.path, post.name)">
-            <span class="status-mark" :style="{color: post.hidden ? '#ff8ec3' : '#8cdecc'}">{{ post.hidden ? '✘' : '✔' }}</span>
-            <span class="article-item-link">{{ post.name | filename }}</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="main-region" v-show="display">
+    <file-list @create="createConfirm = true" ref="filelist"/>
+    <div class="main-region" v-show="display" :class="{'blur': createConfirm || deleteConfirm}">
       <div class="toolbar">
         <div class="left-tool">
-          <div class="btn edit">
+          <div class="btn edit" @click="toastTest()">
             <i class="iconfont icon-edit"></i>
           </div>
-          <div class="btn save">
+          <div class="btn save" @click="savePost()">
             <i class="iconfont icon-save"></i>
+          </div>
+          <div class="btn delete" @click="deleteConfirm = true">
+            <i class="iconfont icon-delete"></i>
           </div>
         </div>
         <div class="right-tool">
           <div class="btn hidden">
-            <bd-switch />
+            <bd-switch v-model="editing.hidden" />
           </div>
           <div class="btn close" @click="closeEditor()">
             <i class="iconfont icon-close"></i>
@@ -38,59 +24,66 @@
         </div>
       </div>
       <div class="editor-region">
-        <md-editor ></md-editor>
+        <md-editor v-model="editing.data"></md-editor>
       </div>
     </div>
+
+    <!-- 创建新文章Dialog -->
+    <bd-dialog :visible.sync="createConfirm">
+      <bd-input v-model="postName" name="文件名称"></bd-input>
+      <div class="footer">
+        <bd-button label="确定" size="tiny" @click.native="createPost(postName)" />
+      </div>
+    </bd-dialog>
+
+    <!-- 删除文章Dialog -->
+    <bd-confirm :visible.sync="deleteConfirm" :label="'是否确认删除：' + editing.title">
+      <bd-button slot="footer" label="确定" size="tiny" @click.native="deletePost()" />
+    </bd-confirm>
+
+    <!-- <bd-toast :visible.sync="dialogTest" label="删除成功"></bd-toast> -->
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Watch } from 'vue-property-decorator'
 import { State, Mutation } from 'vuex-class'
 import HexoSys from '../../libs/HexoSys'
+import FileSys from '../../libs/FileSys'
 import Command from '../../../console/hexo'
 import { filename } from '../../filters/'
 import bdSwitch from '../../components/Bandix-h/switch'
+import bdButton from '../../components/Bandix-h/button'
+import bdDialog from '../../components/Bandix-h/dialog'
+import bdConfirm from '../../components/Bandix-h/confirm'
+import Toast from '../../components/Bandix-h/toast'
+import bdInput from '../../components/Bandix-h/input'
 import MdEditor from '../../components/common/Simplemde'
+import FileList from './FileList'
 
 @Component({
   components: {
-    bdSwitch,
-    MdEditor
-  },
-  filters: {
-    filename
+    bdSwitch, bdButton, bdInput,
+    bdDialog, bdConfirm,
+    MdEditor, FileList
   }
 })
 export default class BlogList extends Vue {
 
   @State(state => state.App.blogPath) _path
+  @State(state => state.Editor.artData) article
   @Mutation('TITLE') setTitle
+  @Mutation('SAVEPOST') savePosts
 
-  display: Boolean = false
-  posts: string[] = []
+  display: boolean = false
   serverPid: any = 0
 
-  created () {
-    this.readPosts()
-  }
+  editing: any = {}
 
-  readPosts() {
-    let posts = HexoSys.readPosts(this._path[0])
-    let postsarr: any[] = new Array()
-    if (posts.indexOf('.DS_Store') > -1) {
-      posts.splice(posts.indexOf('.DS_Store'), 1)
-    }
-    for (let i of posts) {
-     postsarr.push({
-       name: i,
-       path: HexoSys.postLinks(this._path[0], i),
-       hidden: i.substr(0, 1) === '_'
-     })
-    }
-    console.log(postsarr)
-    this.posts = postsarr
-  }
+  postName: string = ''
+  createConfirm: boolean = false
+  deleteConfirm: boolean = false
+  dialogTest = false
 
   onServer() {
     // let Cmd = new Command()
@@ -101,13 +94,55 @@ export default class BlogList extends Vue {
     // })
   }
 
-  openPost(p, n) {
-    this.display = true
-    this.setTitle('正在编辑 - ' + n)
+  createPost(val) {
+    if (!val || val === '') return this.createConfirm = false
+    let cmd = new Command()
+    cmd.newpost(this._path, val, (data) => {
+      console.log(data)
+      this.$nextTick(() => {
+        (<any>this).$refs['filelist'].readPosts()
+      })
+      this.createConfirm = false
+      Toast('创建成功')
+    })
+  }
+
+  savePost() {
+    console.log('save')
+    let save = Promise.resolve(this.savePosts(this.editing))
+    save.then(() => {
+      this.$nextTick(() => {
+        (<any>this).$refs['filelist'].readPosts()
+      })
+      this.reload()
+    })
+  }
+
+  deletePost() {
+    let that = this
+    FileSys.deleteFile(this.editing.path).then(() => {
+      that.clear()
+      that.$nextTick(() => {
+        (<any>that).$refs['filelist'].readPosts()
+      })
+      Toast('成功删除文章')
+    }, (err) => Toast(err))
+  }
+
+  clear() {
+    this.deleteConfirm = false
+    this.display = false
+    this.editing = {}
+  }
+
+  reload() {
+    this.editing = {}
+    this.editing = Object.assign({}, this.article)
   }
 
   closeEditor() {
     this.display = false
+    this.editing = {}
     this.setTitle('文章列表')
   }
 
@@ -116,74 +151,28 @@ export default class BlogList extends Vue {
     Cmd.stop(this.serverPid)
   }
 
+ @Watch('display')
+ onReading(val) {
+   if (val) {
+     this.editing = Object.assign({}, this.article)
+   }
+ }
+
+ @Watch('$route')
+ onChange(val) {
+   this.reload()
+ }
+
 }
 </script>
 
 <style lang="stylus" scoped>
 @import '../../styles/_mixins.styl'
 .posts-list
-  .file-list
-    width 200px
-    box-shadow 1px 3px 2px -1px #7d7878
-    float left
-    .toolbar
-      display flex
-      flex-direction row
-      align-items center
-      min-height 32px
-      padding 4px 0
-      position relative
-      &:after
-        content ''
-        position absolute
-        bottom 0
-        left 0
-        right 0
-        height 1px
-        background-color #f0f0f0
-      .btn
-        margin 0 16px
-        i
-          font-size 16px
-          color #515352
-        &.deploy i
-          font-size 20px
-        &.disabled
-          i
-            color #eee
-            cursor default
-    .list-wrapper
-      overflow auto
-      height calc(100vh - 54px)
-      .article-list
-        list-style none
-        .article-item
-          color #666
-          font-size 14px
-          min-height 24px
-          border-line(bottom, #ccc)
-          padding 8px
-          line-height 1.3
-          overflow hidden
-          cursor default
-          -webkit-user-select none
-          &:hover
-            background linear-gradient(150deg, #fdfbfb 0%, #eef0f2 100%)
-          &:active:hover
-            box-shadow inset 1px 0px 8px -1px #cfd9df
-          .status-mark
-            color #C6C6C6
-            font-size 10px
-            margin 0 2px
-          .article-item-link
-            border-left 1px solid #ccc
-            padding-left 4px
-            color inherit
-            text-decoration none
-            word-break break-all
   .main-region
     margin-left 200px
     height calc(100vh - 55px)
+    transition all .1s
     .toolbar
       display flex
       flex-direction row
@@ -218,4 +207,13 @@ export default class BlogList extends Vue {
         align-items center
     .editor-region
       height 100%
+  .footer
+    text-align right
+    margin-top 16px
+
+.blur
+  background-color #fff
+  opacity .4
+  -webkit-filter blur(2px)
+  filter blur(2px)
 </style>

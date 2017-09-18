@@ -25,7 +25,7 @@ export default class StartScreen extends Vue {
       this.$router.push('/main')
       return
     }
-    (this as any).$electron.remote.dialog.showOpenDialog({ properties: ['openDirectory'] }, (val) => {
+    (<any>this).$electron.remote.dialog.showOpenDialog({ properties: ['openDirectory'] }, (val) => {
       if (val) {
         this.setBlogPath(val[0])
         this.$router.push('/main')
