@@ -53,6 +53,8 @@ export default class Simplemde extends Vue {
     this.simplemde.codemirror.on('change', () => {
       this.$emit('input', this.simplemde.value())
     })
+
+    document.querySelector('.editor-preview-side').className += ' markdown-body'
   }
 
   upHighLight() {
@@ -73,8 +75,10 @@ export default class Simplemde extends Vue {
 </script>
 
 <style>
-@import url('/node_modules/simplemde/dist/simplemde.min.css');
-@import url('/node_modules/highlight.js/styles/color-brewer.css');
+@import url('~simplemde/dist/simplemde.min.css');
+@import url('~highlight.js/styles/color-brewer.css');
+@import url('../../assets/markdowncss.css');
+/* @import url('~github-markdown-css'); */
 a:focus {
   outline: none;
 }

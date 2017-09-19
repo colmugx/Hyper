@@ -41,7 +41,6 @@
       <bd-button slot="footer" label="确定" size="tiny" @click.native="deletePost()" />
     </bd-confirm>
 
-    <!-- <bd-toast :visible.sync="dialogTest" label="删除成功"></bd-toast> -->
   </div>
 </template>
 
@@ -125,7 +124,7 @@ export default class BlogList extends Vue {
       that.$nextTick(() => {
         (<any>that).$refs['filelist'].readPosts()
       })
-      Toast('成功删除文章')
+      Toast['danger']('成功删除文章')
     }, (err) => Toast(err))
   }
 
@@ -133,6 +132,7 @@ export default class BlogList extends Vue {
     this.deleteConfirm = false
     this.display = false
     this.editing = {}
+    this.setTitle('文章列表')
   }
 
   reload() {
