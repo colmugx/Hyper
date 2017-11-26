@@ -8,11 +8,11 @@ export default new Router({
     {
       path: '/',
       name: 'start-screen',
-      component: require('@/views/StartScreen')
+      component: require('@/views/StartScreen.vue').default
     },
     {
       path: '/main',
-      component: require('@/views/MainView'),
+      component: require('@/views/MainView').default,
       children: [
         {
           path: '/',
@@ -20,16 +20,16 @@ export default new Router({
         },
         {
           path: '/blog/posts',
-          component: require('@/views/blog/list')
+          component: require('@/views/blog/list').default
         },
         {
           path: '/review',
-          component: require('@/views/review/review')
+          component: require('@/views/review/review').default
         },
         {
           path: '/setting',
           name: 'Settings',
-          component: require('@/views/setting')
+          component: require('@/views/setting').default
         }
       ]
     },

@@ -1,11 +1,12 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, Menu } from 'electron'
+import { osx } from '../menu/main'
 
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
  */
 if (process.env.NODE_ENV !== 'development') {
-  global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
+  (<any>global).__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
 }
 
 let mainWindow
@@ -21,8 +22,8 @@ function createWindow () {
     height: 600,
     useContentSize: true,
     width: 1024,
-    resizable: false,
-    titleBarStyle: 'hidden'
+    titleBarStyle: 'hidden',
+    backgroundColor: '#ffffff'
   })
 
   mainWindow.loadURL(winURL)
@@ -30,6 +31,11 @@ function createWindow () {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
+
+  if (process.platform === 'darwin') {
+    const menu = Menu.buildFromTemplate(osx(app) as Array<Object>)
+    Menu.setApplicationMenu(menu)
+  }
 }
 
 app.on('ready', createWindow)

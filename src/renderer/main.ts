@@ -1,12 +1,9 @@
 import Vue from 'vue'
-import Electron from 'vue-electron'
 
-import App from './App'
+import App from './App.vue'
 import router from './router'
 import store from './store'
 
-// if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
-Vue.use(Electron)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

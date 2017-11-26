@@ -8,7 +8,7 @@
 <script lang="ts">
 import {Vue, Component} from 'vue-property-decorator'
 import { Mutation } from 'vuex-class'
-import TitleBar from './components/common/TitleBar'
+import TitleBar from './components/common/TitleBar.vue'
 
 @Component({
   name: 'Hyper',

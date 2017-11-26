@@ -1,69 +1,72 @@
+import i18n from './i18n'
+
 export const osx = app => [{
   label: app.getName(),
   submenu: [{
-    label: `关于 ${app.getName()}`,
+    // label: `关于 ${app.getName()}`,
+    label: i18n.t('main.about', {appname: app.getName()}) ,
     role: 'about'
   }, {
     type: 'separator'
   }, {
-    label: '服务',
+    label: i18n.t('main.services'),
     role: 'services',
     submenu: []
   }, {
     type: 'separator'
   }, {
-    label: `隐藏 ${app.getName()}`,
+    label: i18n.t('main.hide', {appname: app.getName()}),
     accelerator: 'Command+H',
     role: 'hide'
   }, {
-    label: '隐藏其它',
+    label: i18n.t('main.hideothers'),
     accelerator: 'Command+Alt+H',
     role: 'hideothers'
   }, {
-    label: '显示全部',
+    label: i18n.t('main.unhide'),
     role: 'unhide'
   }, {
     type: 'separator'
   }, {
-    label: '退出',
+    label: i18n.t('main.quit', {appname: app.getName()}),
     accelerator: 'Command+Q',
     click: function () {
       app.quit()
     }
   }]
 }, {
-  label: '编辑',
+  label: i18n.t('edit.name'),
   submenu: [{
-    label: '撤销',
+    label: i18n.t('edit.undo'),
     accelerator: 'CmdOrCtrl+Z',
     role: 'undo'
   }, {
-    label: '重做',
+    label: i18n.t('edit.redo'),
     accelerator: 'Shift+CmdOrCtrl+Z',
     role: 'redo'
   }, {
     type: 'separator'
   }, {
-    label: '剪切',
+    label: i18n.t('edit.cut'),
     accelerator: 'CmdOrCtrl+X',
     role: 'cut'
   }, {
-    label: '复制',
+    label: i18n.t('edit.copy'),
     accelerator: 'CmdOrCtrl+C',
     role: 'copy'
   }, {
-    label: '粘贴',
+    label: i18n.t('edit.paste'),
     accelerator: 'CmdOrCtrl+V',
     role: 'paste'
   }, {
-    label: '全选',
+    label: i18n.t('edit.selectall'),
     accelerator: 'CmdOrCtrl+A',
     role: 'selectall'
   }]
 }, {
-  label: '查看',
+  label: i18n.t('watch.name'),
   submenu: [{
-    label: '切换全屏',
+    label: i18n.t('watch.full'),
     accelerator: (function () {
       if (process.platform === 'darwin') {
         return 'Ctrl+Command+F'
@@ -77,7 +80,7 @@ export const osx = app => [{
       }
     }
   }, {
-    label: '切换开发者工具',
+    label: i18n.t('watch.toggleDevTools'),
     accelerator: (function () {
       if (process.platform === 'darwin') {
         return 'Alt+Command+I'
@@ -92,14 +95,14 @@ export const osx = app => [{
     }
   }]
 }, {
-  label: '窗口',
+  label: i18n.t('window.name'),
   role: 'window',
   submenu: [{
-    label: '最小化',
+    label: i18n.t('window.minimize'),
     accelerator: 'CmdOrCtrl+M',
     role: 'minimize'
   }, {
-    label: '关闭',
+    label: i18n.t('window.close'),
     accelerator: 'CmdOrCtrl+W',
     role: 'close'
   }, {
