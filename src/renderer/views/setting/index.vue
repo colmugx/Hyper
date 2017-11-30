@@ -47,12 +47,13 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { State } from 'vuex-class'
-import FileSys from '../../libs/FileSys'
-import HexoSys from '../../libs/HexoSys'
+import { ipcRenderer } from 'electron'
+import FileSys from '../../../libs/FileSys'
+import HexoSys from '../../../libs/HexoSys'
 import SimpleConf from './config/simple'
 import Timezones from './config/timezone'
-import bdSwitch from '../../components/Bandix-h/switch'
-import bdButton from '../../components/Bandix-h/button'
+import bdSwitch from '../../components/Bandix-h/switch.vue'
+import bdButton from '../../components/Bandix-h/button.vue'
 
 @Component({
   components: {
@@ -64,7 +65,7 @@ export default class Setting extends Vue {
 
   @State(state => state.App.blogPath) _path
 
-  version: string = FileSys.readYml('/config/default.yml').version
+  version: string = (ipcRenderer.sendSync('ReadConf')).version
   platform: string = require('os').platform() === 'darwin' ? 'MacOS' : require('os').platform()
 
   configValue: any = {}

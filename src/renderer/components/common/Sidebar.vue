@@ -14,7 +14,7 @@
 <script lang="ts">
 import { Vue, Component, Watch } from 'vue-property-decorator'
 import { Mutation } from 'vuex-class'
-import FileSys from '../../libs/FileSys'
+import { ipcRenderer } from 'electron'
 
 @Component
 export default class SideBar extends Vue {
@@ -27,7 +27,7 @@ export default class SideBar extends Vue {
 
   // data
   created () {
-    let obj = FileSys.readYml('/config/default.yml')
+    let obj = ipcRenderer.sendSync('ReadConf')
     this.menus = obj.sidebar.menu
     this.setTitle(this.menus[0]['name'])
   }

@@ -25,7 +25,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { State, Mutation } from 'vuex-class'
-import HexoSys from '../../libs/HexoSys'
+import HexoSys from '../../../libs/HexoSys'
 import { filename } from '../../filters/'
 
 @Component({
@@ -66,7 +66,7 @@ export default class FileList extends Vue {
     this.$parent['display'] = true
     this.loadarticle(post)
     this.setTitle('正在编辑 - ' + post.title)
-    this.$router.replace({query: { id: post.title }})
+    (<Vue>this).$router.replace({query: { id: post.title }})
   }
 
 }

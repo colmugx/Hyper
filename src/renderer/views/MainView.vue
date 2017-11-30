@@ -10,7 +10,7 @@
 <script lang="ts">
 import { Vue,  Component} from 'vue-property-decorator'
 import { Mutation } from 'vuex-class'
-import Sidebar from '../components/common/Sidebar'
+import Sidebar from '../components/common/Sidebar.vue'
 
 @Component({
   components: {
@@ -23,8 +23,9 @@ export default class MainView extends Vue {
   currentHeight: number = 0
 
   handleChange(url) {
-    this.$router.push({ path: url })
+    (<any>this).$router.push({ path: url })
   }
+
 
   mounted () {
     this.currentHeight = document.body.clientHeight - 22

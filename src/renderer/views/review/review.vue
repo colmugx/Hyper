@@ -26,7 +26,7 @@
 <script lang="ts">
 import { Vue, Component, Watch } from 'vue-property-decorator'
 import { State, Mutation } from 'vuex-class'
-import HexoSys from '../../libs/HexoSys'
+import HexoSys from '../../../libs/HexoSys'
 
 @Component
 export default class ReviewPage extends Vue {

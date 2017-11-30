@@ -36,6 +36,8 @@ function createWindow () {
     const menu = Menu.buildFromTemplate(osx(app) as Array<Object>)
     Menu.setApplicationMenu(menu)
   }
+
+  require('./ipc')
 }
 
 app.on('ready', createWindow)

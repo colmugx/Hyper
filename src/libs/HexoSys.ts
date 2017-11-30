@@ -1,9 +1,7 @@
 import fs from 'fs'
 import path from 'path'
-import os from 'os'
+// import os from 'os'
 import jsyaml from 'js-yaml'
-
-import FileSys from './FileSys'
 
 export default {
 

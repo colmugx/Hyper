@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import jsyaml from 'js-yaml'
 
-const renderDir = path.join(__dirname, '..')
+const renderDir = path.join(__dirname, '..', 'renderer')
 
 export default {
   exists (_path) {

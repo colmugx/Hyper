@@ -47,18 +47,18 @@
 <script lang="ts">
 import { Vue, Component, Watch } from 'vue-property-decorator'
 import { State, Mutation } from 'vuex-class'
-import HexoSys from '../../libs/HexoSys'
-import FileSys from '../../libs/FileSys'
+import HexoSys from '../../../libs/HexoSys'
+import FileSys from '../../../libs/FileSys'
 import Command from '../../../console/hexo'
 import { filename } from '../../filters/'
-import bdSwitch from '../../components/Bandix-h/switch'
-import bdButton from '../../components/Bandix-h/button'
-import bdDialog from '../../components/Bandix-h/dialog'
-import bdConfirm from '../../components/Bandix-h/confirm'
+import bdSwitch from '../../components/Bandix-h/switch.vue'
+import bdButton from '../../components/Bandix-h/button.vue'
+import bdDialog from '../../components/Bandix-h/dialog.vue'
+import bdConfirm from '../../components/Bandix-h/confirm.vue'
 import Toast from '../../components/Bandix-h/toast'
-import bdInput from '../../components/Bandix-h/input'
-import MdEditor from '../../components/common/Simplemde'
-import FileList from './FileList'
+import bdInput from '../../components/Bandix-h/input.vue'
+import MdEditor from '../../components/common/Simplemde.vue'
+import FileList from './FileList.vue'
 
 @Component({
   components: {

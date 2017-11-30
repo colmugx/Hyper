@@ -1,5 +1,6 @@
-import HexoSys from '../../libs/HexoSys'
-import FileSys from '../../libs/FileSys'
+import FileSys from '../../../libs/FileSys'
+
+import { ipcRenderer } from 'electron'
 
 const state = {
   artData: {}
@@ -8,17 +9,18 @@ const state = {
 const mutations = {
   LOADPOST: (state, payload) => {
     state.artData = payload
-    state.artData.data = FileSys.readFile(payload.path)
+    state.artData.data = ipcRenderer.sendSync('LoadPost', payload.path)
   },
 
   SAVEPOST: (state, payload) => {
     if (state.artData.hidden === payload.hidden) {
-      return FileSys.writeFile(payload.path, payload.data)
+      ipcRenderer.sendSync('SavePost', payload)
+      return
     }
     if (payload.hidden) {
       let newPath = (state.artData.path).replace(payload.title, '_' + payload.title)
       FileSys.rename(state.artData.path, newPath).then(() => {
-        FileSys.writeFile(newPath, payload.data)
+        ipcRenderer.sendSync('SavePost', {path: newPath, data: payload.data})
       })
       state.artData = {
         path: newPath,
@@ -30,7 +32,7 @@ const mutations = {
       } else {
         let newPath = (state.artData.path).replace(payload.title, (payload.title).substr(1))
         FileSys.rename(state.artData.path, newPath).then(() => {
-          FileSys.writeFile(newPath, payload.data)
+          ipcRenderer.sendSync('SavePost', {path: newPath, data: payload.data})
         })
         state.artData = {
           path: newPath,
