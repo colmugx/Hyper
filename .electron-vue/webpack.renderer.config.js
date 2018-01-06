@@ -44,7 +44,7 @@ let rendererConfig = {
       {
         test: /\.tsx?$/,
         loader: 'ts-loader',
-        exclude: /node_modules|vue\/src/,
+        exclude: /node_modules/,
         options: {
           appendTsSuffixTo: [/\.vue$/]
         }

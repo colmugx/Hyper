@@ -10,7 +10,7 @@
     "build:dir": "node .electron-vue/build.js && electron-builder --dir",
     "build:clean": "cross-env BUILD_TARGET=clean node .electron-vue/build.js",
     "build:web": "cross-env BUILD_TARGET=web node .electron-vue/build.js",
-    "test": "jest",
+    "test": "jest --config test/unit/jest.config.js --coverage",
     "dev": "node .electron-vue/dev-runner.js",
     "pack": "npm run pack:main && npm run pack:renderer",
     "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.main.config.js",
@@ -52,12 +52,12 @@
     }
   },
   "dependencies": {
-    "@types/jest": "^21.1.8",
     "highlight.js": "^9.12.0",
     "js-yaml": "^3.9.1",
     "simplemde": "^1.11.2",
     "vue": "^2.3.3",
     "vue-router": "^3.0.1",
+    "vue-test-utils": "^1.0.0-beta.9",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
@@ -82,13 +82,11 @@
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
     "html-webpack-plugin": "^2.30.1",
-    "jest": "^21.2.1",
     "multispinner": "^0.2.1",
     "node-loader": "^0.6.0",
     "style-loader": "^0.18.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
-    "ts-jest": "^21.2.3",
     "ts-loader": "^3.1.1",
     "typescript": "^2.6.1",
     "url-loader": "^0.5.9",
@@ -102,17 +100,5 @@
     "webpack": "^3.5.2",
     "webpack-dev-server": "^2.7.1",
     "webpack-hot-middleware": "^2.18.2"
-  },
-  "jest": {
-    "transform": {
-      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
-    "testRegex": "(/tests/unit/specs/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "json"
-    ]
   }
 }
